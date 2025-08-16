@@ -1,0 +1,404 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+    
+    /* Food-specific colors */
+    --food-red: 0 100% 63%;
+    --food-orange: 35 100% 64%;
+    --food-green: 120 57% 67%;
+    --food-blue: 210 100% 20%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+    
+    /* Food-specific colors - slightly adjusted for dark mode */
+    --food-red: 0 90% 67%;
+    --food-orange: 35 90% 67%;
+    --food-green: 120 50% 70%;
+    --food-blue: 210 80% 35%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground min-h-screen;
+    font-family: 'Nunito', sans-serif;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.97), rgba(255, 255, 255, 0.97)), url('/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    touch-action: manipulation;
+    overflow-x: hidden;
+  }
+
+  body.dark {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0.92)), url('/background.jpg');
+  }
+  
+  /* Base typography */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    color: #556B2F;  /* Olive green for all headings */
+    line-height: 1.2;
+  }
+  
+  h1 {
+    @apply text-2xl sm:text-3xl md:text-4xl;
+  }
+
+  h2 {
+    @apply text-xl sm:text-2xl md:text-3xl;
+  }
+
+  h3 {
+    @apply text-lg sm:text-xl md:text-2xl;
+  }
+  
+  /* Add a touch of orange to specific headings */
+  h1 span, h2 span, h3 span, .accent-text {
+    color: #FF8C42;  /* Accent orange */
+  }
+  
+  /* Add a gradient effect for main page headings */
+  .main-heading {
+    background: linear-gradient(90deg, #556B2F, #FF8C42);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Card headings */
+  .card h1, .card h2, .card h3, 
+  .card-title, h2.text-2xl, h3.text-xl {
+    color: #556B2F; /* Olive green */
+  }
+  
+  /* Special treatment for dialog/modal titles */
+  .dialog-title, [data-radix-popper-content-wrapper] h2 {
+    color: #556B2F;
+  }
+
+  /* Enhanced card styling */
+  .card {
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  /* Responsive card adjustments */
+  @media (max-width: 767px) {
+    .card {
+      @apply mx-auto w-full max-w-full;
+    }
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  }
+
+  /* Glass effect for important containers */
+  .glass-container {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+  }
+
+  .dark .glass-container {
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Responsive images */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Better form elements for touch */
+  input, 
+  select, 
+  textarea, 
+  button {
+    @apply text-base;
+    min-height: 44px;
+  }
+
+  /* Better tap targets */
+  a, button {
+    @apply sm:text-sm md:text-base;
+    touch-action: manipulation;
+  }
+}
+
+@layer components {
+  .food-item-card {
+    @apply relative overflow-hidden transition-all duration-300 rounded-lg shadow-md hover:shadow-lg;
+  }
+  
+  .food-item-card:hover {
+    @apply scale-[1.03];
+  }
+  
+  .food-item-card:hover .food-item-image {
+    @apply scale-110;
+  }
+  
+  .food-item-image {
+    @apply transition-transform duration-500;
+  }
+  
+  /* Steam animation */
+  .steam {
+    @apply absolute w-6 h-10 opacity-0 animate-steam;
+    background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+  }
+  
+  @keyframes steam {
+    0% {
+      transform: translateY(0) scale(1);
+      opacity: 0;
+    }
+    15% {
+      opacity: 0.8;
+    }
+    50% {
+      transform: translateY(-10px) scale(1.2);
+      opacity: 0.3;
+    }
+    100% {
+      transform: translateY(-20px) scale(1.5);
+      opacity: 0;
+    }
+  }
+  
+  .animate-steam {
+    animation: steam 2s ease-out infinite;
+  }
+  
+  .steam:nth-child(1) {
+    animation-delay: 0.2s;
+  }
+  
+  .steam:nth-child(2) {
+    animation-delay: 0.8s;
+  }
+  
+  .steam:nth-child(3) {
+    animation-delay: 1.5s;
+  }
+
+  /* Enhanced button hover effects */
+  .button-hover-effect {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .button-hover-effect::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+  }
+
+  .button-hover-effect:hover::after {
+    width: 300%;
+    height: 300%;
+  }
+
+  /* Responsive grid layouts */
+  .responsive-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4;
+  }
+
+  /* Mobile menu styling */
+  .mobile-menu {
+    @apply fixed inset-0 bg-white z-50 transform transition-transform duration-300 ease-in-out;
+  }
+
+  .mobile-menu.closed {
+    @apply -translate-y-full;
+  }
+
+  .mobile-menu.open {
+    @apply translate-y-0;
+  }
+
+  /* Prevent horizontal scroll on mobile */
+  .mobile-container {
+    @apply max-w-full overflow-x-hidden;
+  }
+
+  /* Card containers for mobile */
+  .card-container {
+    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-2 sm:px-0;
+  }
+
+  /* Mobile-friendly buttons */
+  .touch-button {
+    @apply min-h-[44px] min-w-[44px] flex items-center justify-center;
+  }
+}
+
+/* Slide animations */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-right {
+  animation: slideInRight 0.3s forwards;
+}
+
+.slide-in-left {
+  animation: slideInLeft 0.3s forwards;
+}
+
+.slide-in-up {
+  animation: slideInUp 0.3s forwards;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 767px) {
+  /* Adjustments for mobile devices */
+  .hide-on-mobile {
+    display: none;
+  }
+
+  .mobile-full-width {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .mobile-stack {
+    @apply flex flex-col;
+  }
+
+  .mobile-center {
+    @apply text-center mx-auto;
+  }
+}
